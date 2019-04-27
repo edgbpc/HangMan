@@ -6,15 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class HangManViewFragment: Fragment() {
+class HangManViewFragment(): Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_hanged_man, container, false)
+    companion object {
+        fun newInstance(mode: String): HangManViewFragment {
+            val args = Bundle()
+            args.putString("mode", mode)
+            val fragment = HangManViewFragment()
+            fragment.arguments = args
+            return fragment
 
-
-        return view
-
+        }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        val mode = arguments!!.getString("mode")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (this.arguments!!["mode"] == "loadScreen") {
+            return inflater.inflate(R.layout.fragment_hanged_man, container, false)
+        } else {
+
+        }
+        return view
+    }
 }
 
