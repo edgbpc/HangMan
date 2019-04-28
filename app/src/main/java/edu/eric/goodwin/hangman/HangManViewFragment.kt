@@ -28,6 +28,7 @@ class HangManViewFragment(): Fragment() {
         if (this.arguments!!["mode"] == "loadScreen") {
             return inflater.inflate(R.layout.fragment_hanged_man, container, false)
         } else {
+            return inflater.inflate(R.layout.fragment_play_field, container, false)
 
         }
         return view

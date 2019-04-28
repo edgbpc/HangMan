@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         startButton.setOnClickListener{
             Log.e("start", "Start Button presses")
+
+            startButton.setVisibility(View.INVISIBLE)
+            hangedManViewFragment = HangManViewFragment.newInstance("playScreen")
+            supportFragmentManager.beginTransaction()
+                .add(R.id.hangedManContainer, hangedManViewFragment!!)
+                .commit()
 
 
 

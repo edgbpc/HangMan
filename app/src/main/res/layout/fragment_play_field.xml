@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent" android:id="@+id/constraint">
+
+
+    <edu.eric.goodwin.hangman.hangManFigureView
+            android:id="@+id/hangManFigure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="193dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/hangManFigure">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                style="?android:attr/buttonBarStyle">
+            <Button
+                    android:text="@string/q"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonQ" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/w"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonW" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/e"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonE" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/r"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonR" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonT" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/y"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonY" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/u"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonU" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/i"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonI" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/o"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonO" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonP" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarStyle" android:gravity="center">
+            <Button
+                    android:text="@string/_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/_1" android:layout_weight="1"
+                    android:visibility="invisible"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonA" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonS" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonD" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/f"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonF" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonG" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonH" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/j"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonJ" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonK" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonL" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/_2" android:layout_weight="1"
+                    android:visibility="invisible"
+                    style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="@string/_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/_3" android:layout_weight="1"
+                    android:visibility="invisible"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonZ" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonX" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonC" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/v"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonV" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonB" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/n"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonN" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonM" android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            <Button
+                    android:text="@string/_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/_4" android:layout_weight="1"
+                    android:visibility="invisible"
+                    style="?android:attr/buttonBarButtonStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,7 @@ class hangManFigureView: View {
     private var currentBodyParts = 6
 
     override fun onDraw(canvas: Canvas) {
+
         Log.i("ondraw", "ondraw called")
         super.onDraw(canvas)
 
