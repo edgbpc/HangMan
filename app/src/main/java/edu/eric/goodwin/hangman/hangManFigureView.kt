@@ -14,7 +14,6 @@ class hangManFigureView: View {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var colorBorder = Color.BLACK
     private var size = 180
@@ -22,41 +21,45 @@ class hangManFigureView: View {
 
     private var currentBodyParts = 6
 
+    private var model: HangManModel? = HangManModel()
+
+
     override fun onDraw(canvas: Canvas) {
+
 
         Log.i("ondraw", "ondraw called")
         super.onDraw(canvas)
 
-
         when (currentBodyParts) {
+
+
             1 -> {
                 drawHead(canvas)
             }
-            2->{
+            2 -> {
                 drawHead(canvas)
                 drawBody(canvas)
             }
-            3->{
+            3 -> {
                 drawHead(canvas)
                 drawBody(canvas)
                 drawLeftArm(canvas)
             }
-            4-> {
+            4 -> {
                 drawHead(canvas)
                 drawBody(canvas)
                 drawLeftArm(canvas)
                 drawLeftFoot(canvas)
 
             }
-            5->{
+            5 -> {
                 drawHead(canvas)
                 drawBody(canvas)
                 drawLeftArm(canvas)
                 drawLeftFoot(canvas)
                 drawRightArm(canvas)
             }
-            6->
-            {
+            6 -> {
                 drawHead(canvas)
                 drawBody(canvas)
                 drawLeftArm(canvas)
@@ -173,19 +176,9 @@ class hangManFigureView: View {
 
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event == null) {
-            return false
-        }
 
-        when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                currentBodyParts++;
-                invalidate()
-
-            }
-        }
-        return true
-
+    fun updateView() {
+        invalidate()
     }
 }
+
