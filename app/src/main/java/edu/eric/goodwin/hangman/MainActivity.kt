@@ -12,10 +12,13 @@ import androidx.core.view.updateLayoutParams
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener {
+class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, hangManFigureView.dataDelegate {
+
 
     private var hangedManViewFragment: HangManViewFragment? = null
     private var model: HangManModel? = HangManModel()
+
+    private var hangManFigure: hangManFigureView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +43,19 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener {
             startButton.setVisibility(View.INVISIBLE)
         }
 
-        hangedManViewFragment?.listener = this
+    //    hangedManViewFragment?.listener = this
+        hangManFigure?.delegate = this
 
+        buttonY.setOnClickListener {
+            updateBodyParts()
+        }
+
+    }
+
+    override fun updateBodyParts() {
+        hangedManViewFragment?.hangManFigure?.updateView()
+     //   hangManFigure!!.currentBodyParts = 3
+    //    hangManFigure!!.invalidate()
     }
 
     override fun buttonAPressed() {
@@ -133,7 +147,7 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener {
     }
 
     override fun buttonWPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun buttonXPressed() {
@@ -141,12 +155,13 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener {
     }
 
     override fun buttonYPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        updateBodyParts()
     }
 
     override fun buttonZPressed() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
 
 
 }

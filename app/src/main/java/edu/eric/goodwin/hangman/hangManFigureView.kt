@@ -12,6 +12,10 @@ import javax.security.auth.login.LoginException
 
 class hangManFigureView: View {
 
+    interface dataDelegate{
+        fun updateBodyParts();
+    }
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -19,10 +23,9 @@ class hangManFigureView: View {
     private var size = 180
     private var borderWidth = 4.0f
 
-    private var currentBodyParts = 6
+    var currentBodyParts = 6
 
-    private var model: HangManModel? = HangManModel()
-
+    var delegate: dataDelegate? = null
 
     override fun onDraw(canvas: Canvas) {
 
@@ -178,6 +181,7 @@ class hangManFigureView: View {
 
 
     fun updateView() {
+        currentBodyParts = 4
         invalidate()
     }
 }

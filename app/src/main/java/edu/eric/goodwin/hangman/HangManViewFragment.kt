@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_hanged_man.*
+import kotlinx.android.synthetic.main.fragment_hanged_man.view.*
 
 
 class HangManViewFragment(): Fragment() {
+
+    //currenly ButtonListener unused.  moved buttons to activity_main while i figure out how to update the data for the
+    //hang man figure
 
     interface ButtonListener {
         fun buttonAPressed()
@@ -42,7 +47,8 @@ class HangManViewFragment(): Fragment() {
 
     }
 
-       var listener: ButtonListener? = null
+    var listener: ButtonListener? = null
+    var hangManFigure: hangManFigureView? = null
 
     companion object {
         fun newInstance(mode: String): HangManViewFragment {
@@ -64,11 +70,8 @@ class HangManViewFragment(): Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-            val view = inflater.inflate(R.layout.fragment_hanged_man, container, false)
-
-            view.buttonY.setOnClickListener{
-
-            }
+            var view = inflater.inflate(R.layout.fragment_hanged_man, container, false)
+        this.hangManFigure = view.hangManFigure
 
             return view
 
