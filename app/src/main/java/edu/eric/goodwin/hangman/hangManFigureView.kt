@@ -13,7 +13,7 @@ import javax.security.auth.login.LoginException
 class hangManFigureView: View {
 
     interface dataDelegate{
-        fun updateBodyParts();
+        fun updateBodyParts(currentParts: Int);
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -35,6 +35,9 @@ class hangManFigureView: View {
 
         when (currentBodyParts) {
 
+            0-> {
+
+            }
 
             1 -> {
                 drawHead(canvas)
@@ -180,8 +183,8 @@ class hangManFigureView: View {
     }
 
 
-    fun updateView() {
-        currentBodyParts = 4
+    fun updateView(currentParts: Int) {
+        currentBodyParts = currentParts
         invalidate()
     }
 }

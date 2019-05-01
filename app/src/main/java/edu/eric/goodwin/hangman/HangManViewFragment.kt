@@ -71,7 +71,7 @@ class HangManViewFragment(): Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             var view = inflater.inflate(R.layout.fragment_hanged_man, container, false)
-        this.hangManFigure = view.hangManFigure
+            this.hangManFigure = view.hangManFigure
 
             return view
 

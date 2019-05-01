@@ -41,19 +41,24 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, ha
             linearLayoutPhrase.setVisibility(View.VISIBLE)
             keyboardLayout.setVisibility(View.VISIBLE)
             startButton.setVisibility(View.INVISIBLE)
+            updateBodyParts(0)
+
+
+
         }
 
     //    hangedManViewFragment?.listener = this
         hangManFigure?.delegate = this
 
         buttonY.setOnClickListener {
-            updateBodyParts()
+            updateBodyParts(0)
         }
 
     }
 
-    override fun updateBodyParts() {
-        hangedManViewFragment?.hangManFigure?.updateView()
+    override fun updateBodyParts(currentParts: Int) {
+        var parts = currentParts
+        hangedManViewFragment?.hangManFigure?.updateView(parts)
      //   hangManFigure!!.currentBodyParts = 3
     //    hangManFigure!!.invalidate()
     }
@@ -155,7 +160,7 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, ha
     }
 
     override fun buttonYPressed() {
-        updateBodyParts()
+       // updateBodyParts(`)
     }
 
     override fun buttonZPressed() {
