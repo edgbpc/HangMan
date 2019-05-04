@@ -33,4 +33,6 @@
     <string name="_3">3</string>
     <string name="_4">4</string>
     <string name="guess_the_phrase">Guess The Phrase</string>
+    <string name="placeholder">placeHolder</string>
+    <string name="start_game">Start Game</string>
 </resources>

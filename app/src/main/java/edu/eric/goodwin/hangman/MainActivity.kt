@@ -2,31 +2,28 @@ package edu.eric.goodwin.hangman
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.util.Log
 import android.view.View
-import androidx.core.view.updateLayoutParams
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_game_field.*
 
 
-class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, hangManFigureView.dataDelegate {
+class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.dataDelegate {
 
 
     private var hangedManViewFragment: HangManViewFragment? = null
     private var model: HangManModel? = HangManModel()
+    private var playingFieldViewFragment: PlayingFieldViewFragment? = null
 
-    private var hangManFigure: hangManFigureView? = null
+    private var hangManFigure: HangManFigureView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        linearLayoutPhrase.setVisibility(View.INVISIBLE)
-        keyboardLayout.setVisibility(View.INVISIBLE)
 
         hangedManViewFragment = supportFragmentManager.findFragmentById(R.id.hangedManContainer) as? HangManViewFragment
         if (hangedManViewFragment == null) {
@@ -38,20 +35,25 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, ha
 
         startButton.setOnClickListener{
             Log.e("start", "Start Button presses")
-            linearLayoutPhrase.setVisibility(View.VISIBLE)
-            keyboardLayout.setVisibility(View.VISIBLE)
             startButton.setVisibility(View.INVISIBLE)
-            updateBodyParts(0)
+         //   updateBodyParts(0)
+
+            playingFieldViewFragment = supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
+            if (playingFieldViewFragment == null) {
+                playingFieldViewFragment = PlayingFieldViewFragment()
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.playingFieldContainer, playingFieldViewFragment!!)
+                    .commit()
+
+            }
 
 
 
-        }
+            playingFieldViewFragment?.listener = this
+            hangManFigure?.delegate = this
+            model!!.selectPhrase()
+           // playingFieldViewFragment?.receivePhrase(model!!.selectedPhrase)
 
-    //    hangedManViewFragment?.listener = this
-        hangManFigure?.delegate = this
-
-        buttonY.setOnClickListener {
-            updateBodyParts(0)
         }
 
     }
@@ -63,8 +65,18 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, ha
     //    hangManFigure!!.invalidate()
     }
 
+    //region buttonOverrides
+
+    override fun startGamePressed() {
+        updateBodyParts(0)
+        model!!.selectPhrase()
+        playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
+    }
+
     override fun buttonAPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+
+
     }
 
     override fun buttonBPressed() {
@@ -160,13 +172,15 @@ class MainActivity : AppCompatActivity(), HangManViewFragment.ButtonListener, ha
     }
 
     override fun buttonYPressed() {
-       // updateBodyParts(`)
+        Log.wtf("Y button", "why do you hate me?")
+       updateBodyParts(3)
     }
 
     override fun buttonZPressed() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    //endregion
 
 
 }

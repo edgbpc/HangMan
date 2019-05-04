@@ -10,7 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import javax.security.auth.login.LoginException
 
-class hangManFigureView: View {
+class HangManFigureView: View {
 
     interface dataDelegate{
         fun updateBodyParts(currentParts: Int);

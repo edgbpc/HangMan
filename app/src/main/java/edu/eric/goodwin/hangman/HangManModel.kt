@@ -4,6 +4,8 @@ class HangManModel {
 
     private var selectedPhrase:String = ""
 
+    var obfuscatedPhrase: String = ""
+
     private var phrases = arrayOf(
         "bury the hatchet",
         "eat like a pig",
@@ -20,9 +22,20 @@ class HangManModel {
 
     private var currentBodyParts = 0;
 
-    private fun selectPhrase(){
-        val randomNumber = (0..10).random()
+    fun selectPhrase(){
+        val randomNumber = (0..9).random()
+        obfuscatePhrase()
         selectedPhrase = phrases[randomNumber]
+    }
+
+    private fun obfuscatePhrase(){
+        selectedPhrase.forEach {
+            if (it.isWhitespace()){
+                obfuscatedPhrase += "   "
+            } else {
+                obfuscatedPhrase += "_  "
+            }
+        }
     }
 
     private fun addToUsedCharacterArray(character: Char){
