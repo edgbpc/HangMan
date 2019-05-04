@@ -1,10 +1,12 @@
 package edu.eric.goodwin.hangman
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game_field.*
 
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private var model: HangManModel? = HangManModel()
     private var playingFieldViewFragment: PlayingFieldViewFragment? = null
     private var guess: Char = ' '
+    private var onStartScreen = true;
 
     private var hangManFigure: HangManFigureView? = null
 
@@ -37,6 +40,8 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
             Log.e("start", "Start Button presses")
             startButton.setVisibility(View.INVISIBLE)
 
+            onStartScreen = false;
+
             playingFieldViewFragment = supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
             if (playingFieldViewFragment == null) {
                 playingFieldViewFragment = PlayingFieldViewFragment()
@@ -52,6 +57,32 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
             hangManFigure?.delegate = this
         }
 
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.chickenTest)
+        builder.setMessage(R.string.title)
+        builder.setPositiveButton(R.string.yes) { _, _ ->
+            if (playingFieldViewFragment == null) {
+                finish()
+            } else {
+                supportFragmentManager.beginTransaction()
+                    .remove(playingFieldViewFragment!!)
+                    .commit()
+                startButton.setVisibility(View.VISIBLE)
+                playingFieldViewFragment = null
+                supportFragmentManager.beginTransaction()
+                    .detach(hangedManViewFragment!!)
+                    .attach(hangedManViewFragment!!)
+                    .commit()
+
+            }
+        }
+        builder.setNegativeButton(R.string.no) { _, _ ->
+            //
+        }
+        builder.show()
     }
 
     override fun updateHangManFigureView(incorrectGuesses: Int) {
@@ -124,7 +155,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     override fun buttonBPressed() {
         guess = 'b'
         checkGuess(guess)
-
     }
 
     override fun buttonCPressed() {

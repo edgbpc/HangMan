@@ -29,8 +29,6 @@ class HangManViewFragment(): Fragment() {
         super.onCreate(savedInstanceState)
         val mode = arguments!!.getString("mode")
 
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
