@@ -114,6 +114,19 @@ class HangManModel {
         }
     }
 
+    fun resetGame(){
+        obfuscatedPhrase = ""
+        numCharactersInPhrase = 0
+        numCorrectGuesses = 0
+        numIncorrectGuesses = 0
+        gameWon = false
+        gameLost = false
+        guess = false
+        correctCharacters.clear()
+
+        selectPhrase()
+
+    }
 
 
     //endregion

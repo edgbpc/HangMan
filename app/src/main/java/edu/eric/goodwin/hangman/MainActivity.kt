@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_game_field.*
 
 
 class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.dataDelegate {
@@ -60,12 +61,22 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
 
 
     override fun startGamePressed() {
-        updateHangManFigureView(0)
-        model!!.selectPhrase()
-        playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
-        model!!.countCharactersInPhrase()
+        if (startGame.text == "Start Game") {
+            updateHangManFigureView(0)
+            model!!.selectPhrase()
+            playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
+            model!!.countCharactersInPhrase()
 
-        Log.wtf("Phrase", model!!.showPhrase())
+            Log.wtf("Phrase", model!!.showPhrase())
+
+        } else if (startGame.text == "New Game") {
+            model!!.resetGame()
+            playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
+            model!!.countCharactersInPhrase()
+            playingFieldViewFragment!!.enableAllKeyboardButtons()
+            Log.wtf("New Game - Phrase", model!!.showPhrase())
+        }
+
     }
 
     private fun checkGuess(guess: Char){
@@ -86,12 +97,20 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         model!!.checkLostCondition()
         if (model!!.gameLost) {
             Toast.makeText(this, "Doh~! You're a goner", Toast.LENGTH_SHORT).show()
+            playingFieldViewFragment!!.toggleStartGameButton()
+            playingFieldViewFragment!!.disableAllKeyboardButtons()
         }
     }
 
-    private fun checkIfWon(){
-        if (model!!.gameWon)
-            Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show()
+    private fun checkIfWon() {
+        if (model!!.gameWon) {
+          Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show()
+          playingFieldViewFragment!!.toggleStartGameButton()
+          playingFieldViewFragment!!.disableAllKeyboardButtons()
+
+
+
+        }
 
     }
 

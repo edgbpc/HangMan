@@ -57,7 +57,7 @@ class PlayingFieldViewFragment(): Fragment() {
 
         var view = inflater.inflate(R.layout.fragment_game_field, container, false)
 
-        view.phraseViewText.text = " not fucking null"
+        view.phraseViewText.text = " "
 
         //region onCLickListeners
 
@@ -169,7 +169,8 @@ class PlayingFieldViewFragment(): Fragment() {
 
         view.startGame.setOnClickListener {
           listener?.startGamePressed()
-            startGame.setEnabled(false)
+            startGame.setText("New Game")
+            toggleStartGameButton()
         }
 
         //endregion
@@ -181,9 +182,72 @@ class PlayingFieldViewFragment(): Fragment() {
     fun receivePhrase(phrase: String){
         var phraseViewText = activity!!.findViewById(R.id.phraseViewText) as TextView
         phraseViewText.setText(phrase)
-
        // this.phrase = phrase
-
     }
 
+    fun toggleStartGameButton() {
+        if (startGame.isEnabled) {
+            startGame.setEnabled(false)
+        } else {
+            startGame.setEnabled(true)
+        }
+    }
+
+    fun disableAllKeyboardButtons() {
+        buttonA.setEnabled(false)
+        buttonB.setEnabled(false)
+        buttonC.setEnabled(false)
+        buttonD.setEnabled(false)
+        buttonE.setEnabled(false)
+        buttonF.setEnabled(false)
+        buttonG.setEnabled(false)
+        buttonH.setEnabled(false)
+        buttonI.setEnabled(false)
+        buttonJ.setEnabled(false)
+        buttonK.setEnabled(false)
+        buttonL.setEnabled(false)
+        buttonM.setEnabled(false)
+        buttonN.setEnabled(false)
+        buttonO.setEnabled(false)
+        buttonP.setEnabled(false)
+        buttonQ.setEnabled(false)
+        buttonR.setEnabled(false)
+        buttonS.setEnabled(false)
+        buttonT.setEnabled(false)
+        buttonU.setEnabled(false)
+        buttonV.setEnabled(false)
+        buttonW.setEnabled(false)
+        buttonX.setEnabled(false)
+        buttonY.setEnabled(false)
+        buttonZ.setEnabled(false)
+    }
+
+    fun enableAllKeyboardButtons() {
+        buttonA.setEnabled(true)
+        buttonB.setEnabled(true)
+        buttonC.setEnabled(true)
+        buttonD.setEnabled(true)
+        buttonE.setEnabled(true)
+        buttonF.setEnabled(true)
+        buttonG.setEnabled(true)
+        buttonH.setEnabled(true)
+        buttonI.setEnabled(true)
+        buttonJ.setEnabled(true)
+        buttonK.setEnabled(true)
+        buttonL.setEnabled(true)
+        buttonM.setEnabled(true)
+        buttonN.setEnabled(true)
+        buttonO.setEnabled(true)
+        buttonP.setEnabled(true)
+        buttonQ.setEnabled(true)
+        buttonR.setEnabled(true)
+        buttonS.setEnabled(true)
+        buttonT.setEnabled(true)
+        buttonU.setEnabled(true)
+        buttonV.setEnabled(true)
+        buttonW.setEnabled(true)
+        buttonX.setEnabled(true)
+        buttonY.setEnabled(true)
+        buttonZ.setEnabled(true)
+    }
 }
