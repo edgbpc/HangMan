@@ -27,11 +27,8 @@ class HangManModel {
     )
     private var correctCharacters = ArrayList<Char>()
 
-    //endregion
 
-    //region public variables
     var obfuscatedPhrase: String = ""
-    //endregion
 
 
     //region Debug Functions.  Disable in release!
@@ -41,7 +38,6 @@ class HangManModel {
 
     //endregion
 
-    //region public functions
 
     fun selectPhrase(){
         val randomNumber = (0..9).random()
@@ -59,6 +55,18 @@ class HangManModel {
             guess = false
             numIncorrectGuesses++
         }
+    }
+
+    fun exposeThePhrase():String {
+        var displayWord = ""
+        selectedPhrase.forEach {
+            if (it.isWhitespace()) {
+                displayWord += " "
+            } else {
+                displayWord += it + " "
+            }
+        }
+        return displayWord
     }
 
     fun createDisplayWordAndReturn(): String{
@@ -82,9 +90,7 @@ class HangManModel {
 
     }
 
-    //endregion
 
-    //region private functions
 
     private fun getLengthOfPhrase(): Int{
         return selectedPhrase.length
@@ -128,8 +134,6 @@ class HangManModel {
 
     }
 
-
-    //endregion
 
 
 }

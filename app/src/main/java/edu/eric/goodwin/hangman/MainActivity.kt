@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private var model: HangManModel? = HangManModel()
     private var playingFieldViewFragment: PlayingFieldViewFragment? = null
     private var guess: Char = ' '
-    private var onStartScreen = true;
-
     private var hangManFigure: HangManFigureView? = null
 
 
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
             Log.e("start", "Start Button presses")
             startButton.setVisibility(View.INVISIBLE)
 
-            onStartScreen = false;
 
             playingFieldViewFragment = supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
             if (playingFieldViewFragment == null) {
@@ -58,6 +55,10 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         }
 
     }
+
+    // part of this override I got help from Joe Carmody.
+    // the logic from If-Else logic is mine but the builder logic is from Joe.
+    // I don't really understand what the { _. _ -> is doing
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
@@ -127,9 +128,10 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private fun checkIfLost(){
         model!!.checkLostCondition()
         if (model!!.gameLost) {
-            Toast.makeText(this, "Doh~! You're a goner", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Doh~! You're a goner." , Toast.LENGTH_SHORT).show()
             playingFieldViewFragment!!.toggleStartGameButton()
             playingFieldViewFragment!!.disableAllKeyboardButtons()
+            playingFieldViewFragment!!.receivePhrase( "\"" + model!!.exposeThePhrase() + "\"\n was the phrase.")
         }
     }
 
