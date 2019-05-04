@@ -2,9 +2,16 @@ package edu.eric.goodwin.hangman
 
 class HangManModel {
 
-    private var selectedPhrase:String = ""
+    //region private variables
 
-    var obfuscatedPhrase: String = ""
+    private var selectedPhrase:String = ""
+    var guess: Boolean = false
+    var numIncorrectGuesses = 0
+    private var maxGuesses = 6
+    var numCharactersInPhrase: Int = 0
+    var numCorrectGuesses: Int = 0
+    var gameWon: Boolean = false
+    var gameLost: Boolean = false
 
     private var phrases = arrayOf(
         "bury the hatchet",
@@ -18,14 +25,69 @@ class HangManModel {
         "peanut gallery",
         "in a pickle"
     )
-    private var usedCharacters = ArrayList<Char>()
+    private var correctCharacters = ArrayList<Char>()
 
-    private var currentBodyParts = 0;
+    //endregion
+
+    //region public variables
+    var obfuscatedPhrase: String = ""
+    //endregion
+
+
+    //region Debug Functions.  Disable in release!
+    fun showPhrase(): String{
+        return selectedPhrase
+    }
+
+    //endregion
+
+    //region public functions
 
     fun selectPhrase(){
         val randomNumber = (0..9).random()
-        obfuscatePhrase()
         selectedPhrase = phrases[randomNumber]
+        obfuscatePhrase()
+    }
+
+    fun checkCharacter(character: Char){
+        if (selectedPhrase.contains(character, true)){
+            guess = true
+            numCorrectGuesses++
+            correctCharacters.add(character)
+
+        } else {
+            guess = false
+            numIncorrectGuesses++
+        }
+    }
+
+    fun createDisplayWordAndReturn(): String{
+        var displayWord = ""
+        selectedPhrase.forEach {
+            if (it.isWhitespace()) {
+                displayWord += "   "
+            } else if (correctCharacters.contains(it)){
+                    displayWord += it + "  "
+            }
+            else {
+                displayWord += "_  "
+            }
+        }
+
+        if (!displayWord.contains("_")){
+            gameWon = true
+        }
+
+        return displayWord
+
+    }
+
+    //endregion
+
+    //region private functions
+
+    private fun getLengthOfPhrase(): Int{
+        return selectedPhrase.length
     }
 
     private fun obfuscatePhrase(){
@@ -38,16 +100,23 @@ class HangManModel {
         }
     }
 
-    private fun addToUsedCharacterArray(character: Char){
-        usedCharacters.add(character)
+    fun countCharactersInPhrase(){
+        selectedPhrase.forEach {
+            if (!it.isWhitespace()){
+                numCharactersInPhrase++
+            }
+        }
     }
 
-    private fun checkCharacter(character: Char): Boolean{
-        return selectedPhrase.contains(character, true)
+    fun checkLostCondition(){
+        if (numIncorrectGuesses == maxGuesses){
+            gameLost = true
+        }
     }
 
-    private fun getLengthOfPhrase(): Int{
-        return selectedPhrase.length
-    }
+
+
+    //endregion
+
 
 }

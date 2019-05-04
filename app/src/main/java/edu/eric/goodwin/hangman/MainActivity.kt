@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_game_field.*
 
 
 class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.dataDelegate {
@@ -16,6 +14,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private var hangedManViewFragment: HangManViewFragment? = null
     private var model: HangManModel? = HangManModel()
     private var playingFieldViewFragment: PlayingFieldViewFragment? = null
+    private var guess: Char = ' '
 
     private var hangManFigure: HangManFigureView? = null
 
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         startButton.setOnClickListener{
             Log.e("start", "Start Button presses")
             startButton.setVisibility(View.INVISIBLE)
-         //   updateBodyParts(0)
 
             playingFieldViewFragment = supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
             if (playingFieldViewFragment == null) {
@@ -51,136 +49,185 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
 
             playingFieldViewFragment?.listener = this
             hangManFigure?.delegate = this
-            model!!.selectPhrase()
-           // playingFieldViewFragment?.receivePhrase(model!!.selectedPhrase)
-
         }
 
     }
 
-    override fun updateBodyParts(currentParts: Int) {
-        var parts = currentParts
-        hangedManViewFragment?.hangManFigure?.updateView(parts)
-     //   hangManFigure!!.currentBodyParts = 3
-    //    hangManFigure!!.invalidate()
+    override fun updateHangManFigureView(incorrectGuesses: Int) {
+        var incorrectGuessesForDisplayImage = incorrectGuesses
+        hangedManViewFragment?.hangManFigure?.updateView(incorrectGuessesForDisplayImage)
     }
 
-    //region buttonOverrides
 
     override fun startGamePressed() {
-        updateBodyParts(0)
+        updateHangManFigureView(0)
         model!!.selectPhrase()
         playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
+        model!!.countCharactersInPhrase()
+
+        Log.wtf("Phrase", model!!.showPhrase())
     }
 
+    private fun checkGuess(guess: Char){
+        model!!.checkCharacter(guess)
+        if (model!!.guess == true){
+            Toast.makeText(this, "Correct!  You survived another round.", Toast.LENGTH_SHORT).show()
+            playingFieldViewFragment?.receivePhrase(model!!.createDisplayWordAndReturn())
+        } else {
+            Toast.makeText(this, "Uh Oh.  That was incorrect!", Toast.LENGTH_SHORT).show()
+
+            updateHangManFigureView(model!!.numIncorrectGuesses)
+        }
+        checkIfWon()
+        checkIfLost()
+    }
+
+    private fun checkIfLost(){
+        model!!.checkLostCondition()
+        if (model!!.gameLost) {
+            Toast.makeText(this, "Doh~! You're a goner", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun checkIfWon(){
+        if (model!!.gameWon)
+            Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show()
+
+    }
+
+    //region keyboard button overrides
+
     override fun buttonAPressed() {
-
-
-
+        guess = 'a'
+        checkGuess(guess)
     }
 
     override fun buttonBPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'b'
+        checkGuess(guess)
+
     }
 
     override fun buttonCPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'c'
+        checkGuess(guess)
     }
 
     override fun buttonDPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'd'
+        checkGuess(guess)
     }
 
     override fun buttonEPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'e'
+        checkGuess(guess)
     }
 
     override fun buttonFPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'f'
+        checkGuess(guess)
     }
 
     override fun buttonGPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'g'
+        checkGuess(guess)
     }
 
     override fun buttonHPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'h'
+        checkGuess(guess)
     }
 
     override fun buttonIPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'i'
+        checkGuess(guess)
     }
 
     override fun buttonJPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'j'
+        checkGuess(guess)
     }
 
     override fun buttonKPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'k'
+        checkGuess(guess)
     }
 
     override fun buttonLPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'l'
+        checkGuess(guess)
     }
 
     override fun buttonMPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'm'
+        checkGuess(guess)
     }
 
     override fun buttonNPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'n'
+        checkGuess(guess)
     }
 
     override fun buttonOPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        guess = 'o'
+        checkGuess(guess)    }
 
     override fun buttonPPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'p'
+        checkGuess(guess)
     }
 
     override fun buttonQPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'q'
+        checkGuess(guess)
     }
 
     override fun buttonRPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'r'
+        checkGuess(guess)
     }
 
     override fun buttonSPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 's'
+        checkGuess(guess)
     }
 
     override fun buttonTPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 't'
+        checkGuess(guess)
     }
 
     override fun buttonUPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'u'
+        checkGuess(guess)
     }
 
     override fun buttonVPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'v'
+        checkGuess(guess)
     }
 
     override fun buttonWPressed() {
-
+        guess = 'w'
+        checkGuess(guess)
     }
 
     override fun buttonXPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'x'
+        checkGuess(guess)
     }
 
     override fun buttonYPressed() {
-        Log.wtf("Y button", "why do you hate me?")
-       updateBodyParts(3)
+        guess = 'y'
+        checkGuess(guess)
     }
 
     override fun buttonZPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        guess = 'z'
+        checkGuess(guess)
     }
-
     //endregion
+
 
 
 }

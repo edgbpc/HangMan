@@ -13,7 +13,7 @@ import javax.security.auth.login.LoginException
 class HangManFigureView: View {
 
     interface dataDelegate{
-        fun updateBodyParts(currentParts: Int);
+        fun updateHangManFigureView(currentParts: Int);
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

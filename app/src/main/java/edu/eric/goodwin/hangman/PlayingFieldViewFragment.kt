@@ -66,95 +66,95 @@ class PlayingFieldViewFragment(): Fragment() {
             buttonA.setEnabled(false)
         }
         view.buttonB.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonBPressed()
             buttonB.setEnabled(false)
         }
         view.buttonC.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonCPressed()
             buttonC.setEnabled(false)
         }
         view.buttonD.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonDPressed()
             buttonD.setEnabled(false)
         }
         view.buttonE.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonEPressed()
             buttonE.setEnabled(false)
         }
         view.buttonF.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonFPressed()
             buttonF.setEnabled(false)
         }
         view.buttonG.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonGPressed()
             buttonG.setEnabled(false)
         }
         view.buttonH.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonHPressed()
             buttonH.setEnabled(false)
         }
         view.buttonI.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonIPressed()
             buttonI.setEnabled(false)
         }
         view.buttonJ.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonJPressed()
             buttonJ.setEnabled(false)
         }
         view.buttonK.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonKPressed()
             buttonK.setEnabled(false)
         }
         view.buttonL.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonLPressed()
             buttonL.setEnabled(false)
         }
         view.buttonM.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonMPressed()
             buttonM.setEnabled(false)
         }
         view.buttonN.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonNPressed()
             buttonN.setEnabled(false)
         }
         view.buttonO.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonOPressed()
             buttonO.setEnabled(false)
         }
         view.buttonP.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonPPressed()
             buttonP.setEnabled(false)
         }
         view.buttonQ.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonQPressed()
             buttonQ.setEnabled(false)
         }
         view.buttonR.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonRPressed()
             buttonR.setEnabled(false)
         }
         view.buttonS.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonSPressed()
             buttonS.setEnabled(false)
         }
         view.buttonT.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonTPressed()
             buttonT.setEnabled(false)
         }
         view.buttonU.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonUPressed()
             buttonU.setEnabled(false)
         }
         view.buttonV.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonVPressed()
             buttonV.setEnabled(false)
         }
         view.buttonW.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonWPressed()
             buttonW.setEnabled(false)
         }
         view.buttonX.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonXPressed()
             buttonX.setEnabled(false)
         }
         view.buttonY.setOnClickListener {
@@ -162,7 +162,7 @@ class PlayingFieldViewFragment(): Fragment() {
             buttonY.setEnabled(false)
         }
         view.buttonZ.setOnClickListener {
-            listener?.buttonAPressed()
+            listener?.buttonZPressed()
             buttonZ.setEnabled(false)
         }
 
