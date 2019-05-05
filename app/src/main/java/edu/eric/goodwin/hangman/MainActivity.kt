@@ -1,8 +1,6 @@
 package edu.eric.goodwin.hangman
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
-import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -12,7 +10,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.SystemClock
 
@@ -40,7 +37,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, 1)
         notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification)
         val pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
         val futureInMillis = SystemClock.elapsedRealtime() + 60000
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent)
@@ -326,11 +322,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         checkGuess(guess)
     }
     //endregion
-
-
-    fun scheduleNotification(notification: Notification , delay: Int){
-
-    }
 
 
 }

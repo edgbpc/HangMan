@@ -4,8 +4,14 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import android.graphics.BitmapFactory
+
+
+
+
 
 class NotificationGenerator {
 
@@ -17,6 +23,8 @@ class NotificationGenerator {
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         builder.setSmallIcon(R.drawable.hal)
+        val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.hal)
+        builder.setLargeIcon(bitmap)
         builder.setContentTitle(title)
         builder.setContentText(message)
         builder.priority = NotificationCompat.PRIORITY_DEFAULT
@@ -27,7 +35,6 @@ class NotificationGenerator {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = context.getString(R.string.channel_name)
-//            val descriptionText = context.getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = "Channel Description"
