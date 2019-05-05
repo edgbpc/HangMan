@@ -1,5 +1,10 @@
 package edu.eric.goodwin.hangman
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.Notification
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +12,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_game_field.*
+import android.os.SystemClock
 
 
-class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.dataDelegate {
+
+class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.DataDelegate {
 
 
     private var hangedManViewFragment: HangManViewFragment? = null
@@ -21,10 +28,33 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private var hangManFigure: HangManFigureView? = null
 
 
+    val generator = NotificationGenerator()
+
+    fun createNotification() {
+        val title = "Hang Man misses you!"
+        val body = "Don't you want to play some more, Dave?."
+        val notification = generator.buildNotificationWith(this, title, body)
+
+
+        val notificationIntent = Intent(this, MyNotificationPublisher::class.java)
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, 1)
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val futureInMillis = SystemClock.elapsedRealtime() + 60000
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent)
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        generator.createNotificationChannel(this)
+
+        createNotification()
 
         hangedManViewFragment = supportFragmentManager.findFragmentById(R.id.hangedManContainer) as? HangManViewFragment
         if (hangedManViewFragment == null) {
@@ -34,12 +64,13 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
                 .commit()
         }
 
-        startButton.setOnClickListener{
+        startButton.setOnClickListener {
             Log.e("start", "Start Button presses")
-            startButton.setVisibility(View.INVISIBLE)
+            startButton.visibility = View.INVISIBLE
 
 
-            playingFieldViewFragment = supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
+            playingFieldViewFragment =
+                supportFragmentManager.findFragmentById(R.id.playingFieldContainer) as? PlayingFieldViewFragment
             if (playingFieldViewFragment == null) {
                 playingFieldViewFragment = PlayingFieldViewFragment()
                 supportFragmentManager.beginTransaction()
@@ -47,8 +78,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
                     .commit()
 
             }
-
-
 
             playingFieldViewFragment?.listener = this
             hangManFigure?.delegate = this
@@ -60,60 +89,45 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     // the logic from If-Else logic is mine but the builder logic is from Joe.
     // I don't really understand what the { _. _ -> is doing
 
+    // have to be on the Main Screen actually exit the app.
+
+
+
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(R.string.chickenTest)
         builder.setMessage(R.string.title)
+        builder.setCancelable(false)
         builder.setPositiveButton(R.string.yes) { _, _ ->
-            if (playingFieldViewFragment == null) {
-                finish()
-            } else {
-                supportFragmentManager.beginTransaction()
-                    .remove(playingFieldViewFragment!!)
-                    .commit()
-                startButton.setVisibility(View.VISIBLE)
-                playingFieldViewFragment = null
-                supportFragmentManager.beginTransaction()
-                    .detach(hangedManViewFragment!!)
-                    .attach(hangedManViewFragment!!)
-                    .commit()
-
-            }
+            resetScreens()
         }
         builder.setNegativeButton(R.string.no) { _, _ ->
-            //
         }
         builder.show()
     }
 
     override fun updateHangManFigureView(incorrectGuesses: Int) {
-        var incorrectGuessesForDisplayImage = incorrectGuesses
-        hangedManViewFragment?.hangManFigure?.updateView(incorrectGuessesForDisplayImage)
+        hangedManViewFragment?.hangManFigure?.updateView(incorrectGuesses)
     }
 
+    private fun startANewGame(){
+        updateHangManFigureView(0)
+        model!!.resetGame()
+        model!!.selectPhrase()
+        playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
+        model!!.countCharactersInPhrase()
+        playingFieldViewFragment!!.enableAllKeyboardButtons()
+
+        Log.wtf("Phrase", model!!.showPhrase())
+    }
 
     override fun startGamePressed() {
-        if (startGame.text == "Start Game") {
-            updateHangManFigureView(0)
-            model!!.selectPhrase()
-            playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
-            model!!.countCharactersInPhrase()
-
-            Log.wtf("Phrase", model!!.showPhrase())
-
-        } else if (startGame.text == "New Game") {
-            model!!.resetGame()
-            playingFieldViewFragment?.receivePhrase(model!!.obfuscatedPhrase)
-            model!!.countCharactersInPhrase()
-            playingFieldViewFragment!!.enableAllKeyboardButtons()
-            Log.wtf("New Game - Phrase", model!!.showPhrase())
-        }
-
+            startANewGame()
     }
 
     private fun checkGuess(guess: Char){
         model!!.checkCharacter(guess)
-        if (model!!.guess == true){
+        if (model!!.guess){
             Toast.makeText(this, "Correct!  You survived another round.", Toast.LENGTH_SHORT).show()
             playingFieldViewFragment?.receivePhrase(model!!.createDisplayWordAndReturn())
         } else {
@@ -125,13 +139,46 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         checkIfLost()
     }
 
+    private fun resetScreens() {
+        if (playingFieldViewFragment == null) {
+            finish()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .remove(playingFieldViewFragment!!)
+                .commit()
+            startButton.visibility = View.VISIBLE
+            playingFieldViewFragment = null
+            supportFragmentManager.beginTransaction()
+                .detach(hangedManViewFragment!!)
+                .attach(hangedManViewFragment!!)
+                .commit()
+
+        }
+    }
+
+    private fun newGamePopUp(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(R.string.newGameTitle)
+        builder.setMessage(R.string.newGameMessage)
+        builder.setCancelable(false)
+        builder.setPositiveButton(R.string.newGameYes) { _, _ ->
+            startANewGame()
+        }
+        builder.setNegativeButton(R.string.newGameNo) { _, _ ->
+            resetScreens()
+        }
+        builder.show()
+    }
+
     private fun checkIfLost(){
         model!!.checkLostCondition()
         if (model!!.gameLost) {
-            Toast.makeText(this, "Doh~! You're a goner." , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Doh~! You're a goner.", Toast.LENGTH_SHORT).show()
             playingFieldViewFragment!!.toggleStartGameButton()
             playingFieldViewFragment!!.disableAllKeyboardButtons()
-            playingFieldViewFragment!!.receivePhrase( "\"" + model!!.exposeThePhrase() + "\"\n was the phrase.")
+            playingFieldViewFragment!!.receivePhrase("\"" + model!!.exposeThePhrase() + "\"\n was the phrase.")
+            newGamePopUp()
+
         }
     }
 
@@ -140,6 +187,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
           Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show()
           playingFieldViewFragment!!.toggleStartGameButton()
           playingFieldViewFragment!!.disableAllKeyboardButtons()
+          newGamePopUp()
 
 
 
@@ -279,6 +327,10 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     }
     //endregion
 
+
+    fun scheduleNotification(notification: Notification , delay: Int){
+
+    }
 
 
 }

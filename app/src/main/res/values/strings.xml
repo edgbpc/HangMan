@@ -34,9 +34,15 @@
     <string name="_4">4</string>
     <string name="guess_the_phrase">Guess The Phrase</string>
     <string name="placeholder">placeHolder</string>
-    <string name="start_game">Start Game</string>
+    <string name="start_game">Begin Game</string>
     <string name="chickenTest">Running away are we?</string>
     <string name="title">You sure? Only noobs give up</string>
     <string name="yes">Yes, I R Noob</string>
     <string name="no">No, Hit me again</string>
+    <string name = "newGameTitle">Play Again?</string>
+    <string name = "newGameMessage">You know you want to.  Doooo it</string>
+    <string name = "newGameYes">Yes, boss</string>
+    <string name = "newGameNo">No, I am deleting this app</string>
+    <string name="channel_name">hangman channel</string>
+
 </resources>

@@ -6,26 +6,22 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import javax.security.auth.login.LoginException
 
-class HangManFigureView: View {
+class HangManFigureView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    interface dataDelegate{
-        fun updateHangManFigureView(currentParts: Int);
+    interface DataDelegate{
+        fun updateHangManFigureView(incorrectGuesses: Int)
     }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private var colorBorder = Color.BLACK
     private var size = 180
     private var borderWidth = 4.0f
 
-    var currentBodyParts = 6
+    private var currentBodyParts = 6
 
-    var delegate: dataDelegate? = null
+    var delegate: DataDelegate? = null
 
     override fun onDraw(canvas: Canvas) {
 
@@ -92,7 +88,7 @@ class HangManFigureView: View {
             drawLeftArm(canvas)
             drawLeftFoot(canvas)
             drawRightFoot(canvas)
-            currentBodyParts = 0;
+            currentBodyParts = 0
         }
 
 
@@ -111,10 +107,10 @@ class HangManFigureView: View {
     }
 
     private fun drawBody(canvas: Canvas) {
-        var startY = 180F
-        var startX = 240F
-        var stopY = 500F
-        var stopX = 240F
+        val startY = 180F
+        val startX = 240F
+        val stopY = 500F
+        val stopX = 240F
 
         paint.color = colorBorder
         paint.style = Paint.Style.STROKE
@@ -126,10 +122,10 @@ class HangManFigureView: View {
 
     private fun drawRightArm(canvas: Canvas) {
 
-        var startY = 280F
-        var startX = 240F
-        var stopY = 225f
-        var stopX = 150f
+        val startY = 280F
+        val startX = 240F
+        val stopY = 225f
+        val stopX = 150f
 
         paint.color = colorBorder
         paint.style = Paint.Style.STROKE
@@ -140,10 +136,10 @@ class HangManFigureView: View {
 
     private fun drawLeftArm(canvas: Canvas) {
 
-        var startY = 280F
-        var startX = 240F
-        var stopY = 225f
-        var stopX = 330f
+        val startY = 280F
+        val startX = 240F
+        val stopY = 225f
+        val stopX = 330f
 
         paint.color = colorBorder
         paint.style = Paint.Style.STROKE
@@ -153,10 +149,10 @@ class HangManFigureView: View {
     }
 
     private fun drawLeftFoot(canvas: Canvas) {
-        var startY = 500F
-        var startX = 240F
-        var stopY = 550f
-        var stopX = 300f
+        val startY = 500F
+        val startX = 240F
+        val stopY = 550f
+        val stopX = 300f
 
         paint.color = colorBorder
         paint.style = Paint.Style.STROKE
@@ -168,10 +164,10 @@ class HangManFigureView: View {
 
     private fun drawRightFoot(canvas: Canvas) {
 
-        var startY = 500F
-        var startX = 240F
-        var stopY = 550f
-        var stopX = 180f
+        val startY = 500F
+        val startX = 240F
+        val stopY = 550f
+        val stopX = 180f
 
 
         paint.color = colorBorder

@@ -8,8 +8,8 @@ class HangManModel {
     var guess: Boolean = false
     var numIncorrectGuesses = 0
     private var maxGuesses = 6
-    var numCharactersInPhrase: Int = 0
-    var numCorrectGuesses: Int = 0
+    private var numCharactersInPhrase: Int = 0
+    private var numCorrectGuesses: Int = 0
     var gameWon: Boolean = false
     var gameLost: Boolean = false
 
@@ -31,12 +31,10 @@ class HangManModel {
     var obfuscatedPhrase: String = ""
 
 
-    //region Debug Functions.  Disable in release!
     fun showPhrase(): String{
-        return selectedPhrase
+        return this.selectedPhrase
     }
 
-    //endregion
 
 
     fun selectPhrase(){
@@ -60,10 +58,10 @@ class HangManModel {
     fun exposeThePhrase():String {
         var displayWord = ""
         selectedPhrase.forEach {
-            if (it.isWhitespace()) {
-                displayWord += " "
+            displayWord += if (it.isWhitespace()) {
+                " "
             } else {
-                displayWord += it + " "
+                it + " "
             }
         }
         return displayWord
@@ -72,13 +70,12 @@ class HangManModel {
     fun createDisplayWordAndReturn(): String{
         var displayWord = ""
         selectedPhrase.forEach {
-            if (it.isWhitespace()) {
-                displayWord += "   "
+            displayWord += if (it.isWhitespace()) {
+                "   "
             } else if (correctCharacters.contains(it)){
-                    displayWord += it + "  "
-            }
-            else {
-                displayWord += "_  "
+                it + "  "
+            } else {
+                "_  "
             }
         }
 
@@ -92,16 +89,14 @@ class HangManModel {
 
 
 
-    private fun getLengthOfPhrase(): Int{
-        return selectedPhrase.length
-    }
+
 
     private fun obfuscatePhrase(){
         selectedPhrase.forEach {
-            if (it.isWhitespace()){
-                obfuscatedPhrase += "   "
+            obfuscatedPhrase += if (it.isWhitespace()){
+                "   "
             } else {
-                obfuscatedPhrase += "_  "
+                "_  "
             }
         }
     }
@@ -129,8 +124,7 @@ class HangManModel {
         gameLost = false
         guess = false
         correctCharacters.clear()
-
-        selectPhrase()
+      //  selectPhrase()
 
     }
 

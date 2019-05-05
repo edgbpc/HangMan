@@ -12,19 +12,19 @@ Game Page
 3. When the user selects an incorrect letter, a body part is drawn - DONE
 4. sed letters are displayed on the screen - DONE VIA GREYED OUT SELECTED BUTTONS ON KEYBOARD
 5. If the hangman is completed, the user loses the game and is presented with an opportunity to play again.
-        - DONE via TOASTS.  NEW GAME BUTTON BECOMES ACTIVE
+        - DONE via TOASTS.  POP UP
     1.The phrase should be filled out in the blanks if the user did not complete the phrase within the allowed
     number of attempts  - DONE
-    2.There needs to be some indication that the user failed.  - DONE via TOASTS.  NEW GAME BUTTON BECOMES ACTIVE
-6.The user should be taken back to the Main Page when the game is over if they choose not to play again. - ????
+    2.There needs to be some indication that the user failed.  - DONE via TOASTS.
+6.The user should be taken back to the Main Page when the game is over if they choose not to play again. - DONE
     1. If the user chooses to play again, you should immediately take them into the game and not back to the Main Page.
-    -- THE NEW GAME BUTTON DOES THIS
+    -- DONE
 7.The user is allowed to end the game at any point and be taken back to the Main Page
     1.If a user chooses to do this they need to be “chicken tested” aka: “Are you sure you want to quit?” - DONE
     2.They should not be taken back until they answer the “Chicken Test" - DONE
 
 
-Notifications --- NOT DONE
+Notifications -- PARTIALLY DONE. I CAN GET A NOTIFICATION TO THE DRAWER BUT NOT A POP UP. ALSO MY ICON DOESN'T SHOW :(
 1.You must implement local notifications.
 2.Setup a local notification that can be generated within 1 minute (5 if the system does not allow) of closing the application.
 3.Create a message in this to “convince” the user they should return to your app.

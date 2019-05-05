@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game_field.*
 import kotlinx.android.synthetic.main.fragment_game_field.view.*
 
-class PlayingFieldViewFragment(): Fragment() {
+class PlayingFieldViewFragment: Fragment() {
 
     var listener: ButtonListener? = null
 
@@ -46,208 +46,228 @@ class PlayingFieldViewFragment(): Fragment() {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(savedInstanceState)
-
-
-
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        var view = inflater.inflate(R.layout.fragment_game_field, container, false)
+        val view = inflater.inflate(R.layout.fragment_game_field, container, false)
 
         view.phraseViewText.text = " "
 
-        //region onCLickListeners
+        //load keyboard buttons disabled by default
+
+        //region disable keyboard
+        view.buttonA.isEnabled = false
+        view.buttonB.isEnabled = false
+        view.buttonC.isEnabled = false
+        view.buttonD.isEnabled = false
+        view.buttonE.isEnabled = false
+        view.buttonF.isEnabled = false
+        view.buttonG.isEnabled = false
+        view.buttonH.isEnabled = false
+        view.buttonI.isEnabled = false
+        view.buttonJ.isEnabled = false
+        view.buttonK.isEnabled = false
+        view.buttonL.isEnabled = false
+        view.buttonM.isEnabled = false
+        view.buttonN.isEnabled = false
+        view.buttonO.isEnabled = false
+        view.buttonP.isEnabled = false
+        view.buttonQ.isEnabled = false
+        view.buttonR.isEnabled = false
+        view.buttonS.isEnabled = false
+        view.buttonT.isEnabled = false
+        view.buttonU.isEnabled = false
+        view.buttonV.isEnabled = false
+        view.buttonW.isEnabled = false
+        view.buttonX.isEnabled = false
+        view.buttonY.isEnabled = false
+        view.buttonZ.isEnabled = false
+
+        //endregion
+
+        //region onClickListeners
 
         view.buttonA.setOnClickListener {
             listener?.buttonAPressed()
-            buttonA.setEnabled(false)
+            buttonA.isEnabled = false
         }
         view.buttonB.setOnClickListener {
             listener?.buttonBPressed()
-            buttonB.setEnabled(false)
+            buttonB.isEnabled = false
         }
         view.buttonC.setOnClickListener {
             listener?.buttonCPressed()
-            buttonC.setEnabled(false)
+            buttonC.isEnabled = false
         }
         view.buttonD.setOnClickListener {
             listener?.buttonDPressed()
-            buttonD.setEnabled(false)
+            buttonD.isEnabled = false
         }
         view.buttonE.setOnClickListener {
             listener?.buttonEPressed()
-            buttonE.setEnabled(false)
+            buttonE.isEnabled = false
         }
         view.buttonF.setOnClickListener {
             listener?.buttonFPressed()
-            buttonF.setEnabled(false)
+            buttonF.isEnabled = false
         }
         view.buttonG.setOnClickListener {
             listener?.buttonGPressed()
-            buttonG.setEnabled(false)
+            buttonG.isEnabled = false
         }
         view.buttonH.setOnClickListener {
             listener?.buttonHPressed()
-            buttonH.setEnabled(false)
+            buttonH.isEnabled = false
         }
         view.buttonI.setOnClickListener {
             listener?.buttonIPressed()
-            buttonI.setEnabled(false)
+            buttonI.isEnabled = false
         }
         view.buttonJ.setOnClickListener {
             listener?.buttonJPressed()
-            buttonJ.setEnabled(false)
+            buttonJ.isEnabled = false
         }
         view.buttonK.setOnClickListener {
             listener?.buttonKPressed()
-            buttonK.setEnabled(false)
+            buttonK.isEnabled = false
         }
         view.buttonL.setOnClickListener {
             listener?.buttonLPressed()
-            buttonL.setEnabled(false)
+            buttonL.isEnabled = false
         }
         view.buttonM.setOnClickListener {
             listener?.buttonMPressed()
-            buttonM.setEnabled(false)
+            buttonM.isEnabled = false
         }
         view.buttonN.setOnClickListener {
             listener?.buttonNPressed()
-            buttonN.setEnabled(false)
+            buttonN.isEnabled = false
         }
         view.buttonO.setOnClickListener {
             listener?.buttonOPressed()
-            buttonO.setEnabled(false)
+            buttonO.isEnabled = false
         }
         view.buttonP.setOnClickListener {
             listener?.buttonPPressed()
-            buttonP.setEnabled(false)
+            buttonP.isEnabled = false
         }
         view.buttonQ.setOnClickListener {
             listener?.buttonQPressed()
-            buttonQ.setEnabled(false)
+            buttonQ.isEnabled = false
         }
         view.buttonR.setOnClickListener {
             listener?.buttonRPressed()
-            buttonR.setEnabled(false)
+            buttonR.isEnabled = false
         }
         view.buttonS.setOnClickListener {
             listener?.buttonSPressed()
-            buttonS.setEnabled(false)
+            buttonS.isEnabled = false
         }
         view.buttonT.setOnClickListener {
             listener?.buttonTPressed()
-            buttonT.setEnabled(false)
+            buttonT.isEnabled = false
         }
         view.buttonU.setOnClickListener {
             listener?.buttonUPressed()
-            buttonU.setEnabled(false)
+            buttonU.isEnabled = false
         }
         view.buttonV.setOnClickListener {
             listener?.buttonVPressed()
-            buttonV.setEnabled(false)
+            buttonV.isEnabled = false
         }
         view.buttonW.setOnClickListener {
             listener?.buttonWPressed()
-            buttonW.setEnabled(false)
+            buttonW.isEnabled = false
         }
         view.buttonX.setOnClickListener {
             listener?.buttonXPressed()
-            buttonX.setEnabled(false)
+            buttonX.isEnabled = false
         }
         view.buttonY.setOnClickListener {
             listener?.buttonYPressed()
-            buttonY.setEnabled(false)
+            buttonY.isEnabled = false
         }
         view.buttonZ.setOnClickListener {
             listener?.buttonZPressed()
-            buttonZ.setEnabled(false)
+            buttonZ.isEnabled = false
         }
-
 
         view.startGame.setOnClickListener {
           listener?.startGamePressed()
-            startGame.setText("New Game")
-            toggleStartGameButton()
+          toggleStartGameButton()
         }
 
         //endregion
 
-        return view
+       return view
 
     }
 
     fun receivePhrase(phrase: String){
-        var phraseViewText = activity!!.findViewById(R.id.phraseViewText) as TextView
-        phraseViewText.setText(phrase)
+        val phraseViewText = activity!!.findViewById(R.id.phraseViewText) as TextView
+        phraseViewText.text = phrase
        // this.phrase = phrase
     }
 
     fun toggleStartGameButton() {
-        if (startGame.isEnabled) {
-            startGame.setEnabled(false)
-        } else {
-            startGame.setEnabled(true)
-        }
+        startGame.isEnabled = !startGame.isEnabled
     }
 
     fun disableAllKeyboardButtons() {
-        buttonA.setEnabled(false)
-        buttonB.setEnabled(false)
-        buttonC.setEnabled(false)
-        buttonD.setEnabled(false)
-        buttonE.setEnabled(false)
-        buttonF.setEnabled(false)
-        buttonG.setEnabled(false)
-        buttonH.setEnabled(false)
-        buttonI.setEnabled(false)
-        buttonJ.setEnabled(false)
-        buttonK.setEnabled(false)
-        buttonL.setEnabled(false)
-        buttonM.setEnabled(false)
-        buttonN.setEnabled(false)
-        buttonO.setEnabled(false)
-        buttonP.setEnabled(false)
-        buttonQ.setEnabled(false)
-        buttonR.setEnabled(false)
-        buttonS.setEnabled(false)
-        buttonT.setEnabled(false)
-        buttonU.setEnabled(false)
-        buttonV.setEnabled(false)
-        buttonW.setEnabled(false)
-        buttonX.setEnabled(false)
-        buttonY.setEnabled(false)
-        buttonZ.setEnabled(false)
+        buttonA.isEnabled = false
+        buttonB.isEnabled = false
+        buttonC.isEnabled = false
+        buttonD.isEnabled = false
+        buttonE.isEnabled = false
+        buttonF.isEnabled = false
+        buttonG.isEnabled = false
+        buttonH.isEnabled = false
+        buttonI.isEnabled = false
+        buttonJ.isEnabled = false
+        buttonK.isEnabled = false
+        buttonL.isEnabled = false
+        buttonM.isEnabled = false
+        buttonN.isEnabled = false
+        buttonO.isEnabled = false
+        buttonP.isEnabled = false
+        buttonQ.isEnabled = false
+        buttonR.isEnabled = false
+        buttonS.isEnabled = false
+        buttonT.isEnabled = false
+        buttonU.isEnabled = false
+        buttonV.isEnabled = false
+        buttonW.isEnabled = false
+        buttonX.isEnabled = false
+        buttonY.isEnabled = false
+        buttonZ.isEnabled = false
     }
 
     fun enableAllKeyboardButtons() {
-        buttonA.setEnabled(true)
-        buttonB.setEnabled(true)
-        buttonC.setEnabled(true)
-        buttonD.setEnabled(true)
-        buttonE.setEnabled(true)
-        buttonF.setEnabled(true)
-        buttonG.setEnabled(true)
-        buttonH.setEnabled(true)
-        buttonI.setEnabled(true)
-        buttonJ.setEnabled(true)
-        buttonK.setEnabled(true)
-        buttonL.setEnabled(true)
-        buttonM.setEnabled(true)
-        buttonN.setEnabled(true)
-        buttonO.setEnabled(true)
-        buttonP.setEnabled(true)
-        buttonQ.setEnabled(true)
-        buttonR.setEnabled(true)
-        buttonS.setEnabled(true)
-        buttonT.setEnabled(true)
-        buttonU.setEnabled(true)
-        buttonV.setEnabled(true)
-        buttonW.setEnabled(true)
-        buttonX.setEnabled(true)
-        buttonY.setEnabled(true)
-        buttonZ.setEnabled(true)
+        buttonA.isEnabled = true
+        buttonB.isEnabled = true
+        buttonC.isEnabled = true
+        buttonD.isEnabled = true
+        buttonE.isEnabled = true
+        buttonF.isEnabled = true
+        buttonG.isEnabled = true
+        buttonH.isEnabled = true
+        buttonI.isEnabled = true
+        buttonJ.isEnabled = true
+        buttonK.isEnabled = true
+        buttonL.isEnabled = true
+        buttonM.isEnabled = true
+        buttonN.isEnabled = true
+        buttonO.isEnabled = true
+        buttonP.isEnabled = true
+        buttonQ.isEnabled = true
+        buttonR.isEnabled = true
+        buttonS.isEnabled = true
+        buttonT.isEnabled = true
+        buttonU.isEnabled = true
+        buttonV.isEnabled = true
+        buttonW.isEnabled = true
+        buttonX.isEnabled = true
+        buttonY.isEnabled = true
+        buttonZ.isEnabled = true
     }
 }
