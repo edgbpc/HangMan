@@ -10,25 +10,6 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/linearLayoutPhrase" android:gravity="center">
-        <TextView
-                android:text="@string/guess_the_phrase"
-                android:textSize="30sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/phrase"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp" android:id="@+id/phraseViewText"
-                android:text="@string/placeholder"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/keyboardLayout"
             android:layout_height="wrap_content">
@@ -217,6 +198,24 @@
                     android:visibility="invisible"
                     style="?android:attr/buttonBarButtonStyle"/>
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/linearLayoutPhrase" android:gravity="center">
+        <TextView
+                android:text="@string/guess_the_phrase"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phrase"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp" android:id="@+id/phraseViewText"
+                android:text="@string/placeholder"/>
     </LinearLayout>
 
 </LinearLayout>

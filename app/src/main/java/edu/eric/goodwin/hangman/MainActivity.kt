@@ -15,6 +15,8 @@ import android.os.SystemClock
 
 
 
+
+
 class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.DataDelegate {
 
 
@@ -23,16 +25,14 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private var playingFieldViewFragment: PlayingFieldViewFragment? = null
     private var guess: Char = ' '
     private var hangManFigure: HangManFigureView? = null
-
-
     val generator = NotificationGenerator()
+
+
 
     fun createNotification() {
         val title = "Hang Man misses you!"
         val body = "Don't you want to play some more, Dave?."
         val notification = generator.buildNotificationWith(this, title, body)
-
-
         val notificationIntent = Intent(this, MyNotificationPublisher::class.java)
         notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, 1)
         notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification)
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         val futureInMillis = SystemClock.elapsedRealtime() + 60000
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent)
+
 
     }
 
@@ -49,8 +50,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         setContentView(R.layout.activity_main)
 
         generator.createNotificationChannel(this)
-
-        createNotification()
+     //   createNotification()
 
         hangedManViewFragment = supportFragmentManager.findFragmentById(R.id.hangedManContainer) as? HangManViewFragment
         if (hangedManViewFragment == null) {
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         }
 
         startButton.setOnClickListener {
-            Log.e("start", "Start Button presses")
+            Log.e("start", "Start Button pressed")
             startButton.visibility = View.INVISIBLE
 
 
@@ -77,17 +77,37 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
 
             playingFieldViewFragment?.listener = this
             hangManFigure?.delegate = this
+
+
         }
+
+        model!!.numIncorrectGuesses = 6
+        updateHangManFigureView(model!!.numIncorrectGuesses)
 
     }
 
     // part of this override I got help from Joe Carmody.
     // the logic from If-Else logic is mine but the builder logic is from Joe.
     // I don't really understand what the { _. _ -> is doing
-
     // have to be on the Main Screen actually exit the app.
 
+//    override fun onDestroy() {
+//        Log.wtf("onDestory", "onDestroyed called")
+//       // createNotification()
+//        super.onDestroy()
+//    }
+//
+    override fun onStop() {
+        Log.wtf("onStop", "onStop called")
+        createNotification()
+        super.onStop()
+    }
 
+    override fun onResume() {
+        Log.wtf("onResume", "onResume called")
+        updateHangManFigureView(model!!.numIncorrectGuesses)
+        super.onResume()
+    }
 
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)

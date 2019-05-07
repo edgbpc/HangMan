@@ -9,7 +9,7 @@ class HangManModel {
     var numIncorrectGuesses = 0
     private var maxGuesses = 6
     private var numCharactersInPhrase: Int = 0
-    private var numCorrectGuesses: Int = 0
+    var numCorrectGuesses: Int = 0
     var gameWon: Boolean = false
     var gameLost: Boolean = false
 

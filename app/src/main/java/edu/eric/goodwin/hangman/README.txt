@@ -10,7 +10,7 @@ Game Page
 (this cannot be a single word for the round)  - DONE
 2. When a phrase is given, the words should be spaced out so that it does not look like one long word. - DONE
 3. When the user selects an incorrect letter, a body part is drawn - DONE
-4. sed letters are displayed on the screen - DONE VIA GREYED OUT SELECTED BUTTONS ON KEYBOARD
+4. Used letters are displayed on the screen - DONE VIA GREYED OUT SELECTED BUTTONS ON KEYBOARD
 5. If the hangman is completed, the user loses the game and is presented with an opportunity to play again.
         - DONE via TOASTS.  POP UP
     1.The phrase should be filled out in the blanks if the user did not complete the phrase within the allowed
@@ -24,13 +24,13 @@ Game Page
     2.They should not be taken back until they answer the “Chicken Test" - DONE
 
 
-Notifications -- PARTIALLY DONE. I CAN GET A NOTIFICATION TO THE DRAWER BUT NOT A POP UP. ALSO MY ICON DOESN'T SHOW :(
+Notifications --  DONE. I CAN GET POP UP BUT REQUIRES USER TO ENABLE POP UP UNDER BEHAVIORS ON DEVICE
 1.You must implement local notifications.
 2.Setup a local notification that can be generated within 1 minute (5 if the system does not allow) of closing the application.
 3.Create a message in this to “convince” the user they should return to your app.
 Additional Requirements
 4.The stick figure hangman needs to be drawn with either a Canvas/View, or with drawables. NO PREDEFINED IMAGES!! - DONE
 5.Orientation is not necessary. However, if it is not supported, it must be locked (can be portrait or landscape locked) - DONE
-6.Good MVC design patterns of course  - I HOPE DONE
+6.Good MVC design patterns of course  - I HOPE
 7. The app should not continue to add to the View Stack (I should only be able to hit back twice to completely close this app) - I GUESS?
 8.Your “phrase bank” must have at least 10 phrases - DONE
