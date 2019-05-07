@@ -12,9 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.SystemClock
-
-
-
+import kotlinx.android.synthetic.main.fragment_game_field.*
 
 
 class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListener, HangManFigureView.DataDelegate {
@@ -79,6 +77,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
             hangManFigure?.delegate = this
 
 
+
         }
 
         model!!.numIncorrectGuesses = 6
@@ -138,7 +137,7 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     }
 
     override fun startGamePressed() {
-            startANewGame()
+        startANewGame()
     }
 
     private fun checkGuess(guess: Char){
@@ -190,7 +189,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
         model!!.checkLostCondition()
         if (model!!.gameLost) {
             Toast.makeText(this, "Doh~! You're a goner.", Toast.LENGTH_SHORT).show()
-            playingFieldViewFragment!!.toggleStartGameButton()
             playingFieldViewFragment!!.disableAllKeyboardButtons()
             playingFieldViewFragment!!.receivePhrase("\"" + model!!.exposeThePhrase() + "\"\n was the phrase.")
             newGamePopUp()
@@ -201,7 +199,6 @@ class MainActivity : AppCompatActivity(), PlayingFieldViewFragment.ButtonListene
     private fun checkIfWon() {
         if (model!!.gameWon) {
           Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show()
-          playingFieldViewFragment!!.toggleStartGameButton()
           playingFieldViewFragment!!.disableAllKeyboardButtons()
           newGamePopUp()
 
